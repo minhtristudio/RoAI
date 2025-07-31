@@ -1,0 +1,220 @@
+--[[	
+
+	/ ＲＯＣＬＯＴＨＥＳ
+	Version - 0.7.5 (Fixed Bundle Issues)
+	| RoClothes is a Client-Sided Exploiting Script, that allows the player to have nude BodyParts/Clothes
+	Can be used on any executor
+	
+	| This script WILL cause FPS drops, because of BodyParts/Clothes meshes inside the Player model
+	
+	| 𝐔𝐒𝐄 𝐀𝐓 𝐘𝐎𝐔𝐑 𝐎𝐖𝐍 𝐑𝐈𝐒𝐊
+	| 𝐖𝐎𝐑𝐊 𝐈𝐍 𝐏𝐑𝐎𝐆𝐑𝐄𝐒𝐒
+	
+	FIXES IN THIS VERSION:
+	- Fixed bundle persistence issues where previous bundle items remain when switching
+	- Added proper bundle clearing when switching between different bundles
+	- Improved CharacterReset function to properly clear CurrentBundle
+	- Added bundle state management to prevent item conflicts
+	- Enhanced bundle switching to prevent bikini and other items from persisting
+	
+	original version 0.7
+	local version 0.7.5:lerp()
+]]
+
+local RS = game:GetService("RunService")
+
+function RoClothes(Player)
+	warn("RoClothes Connected - Fixed Bundle Version")
+
+	--[[
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------------------------------
+	]]
+
+	local GUIObject = {}
+
+	GUIObject.Screen = Instance.new("ScreenGui")
+	GUIObject.MainFrame = Instance.new("TextButton")
+	GUIObject.Dragger = Instance.new("UIDragDetector")
+	GUIObject.PageFrame = Instance.new("Frame")
+	GUIObject.UIGradient = Instance.new("UIGradient")
+	GUIObject.UICorner = Instance.new("UICorner")
+	GUIObject.Clothes_3 = Instance.new("Frame")
+	GUIObject.ClothesSearch = Instance.new("TextBox")
+	GUIObject.UIGradient_34 = Instance.new("UIGradient")
+	GUIObject.UICorner_35 = Instance.new("UICorner")
+	GUIObject.ClothesButtonFrame = Instance.new("ScrollingFrame")
+	GUIObject.UIGridLayout = Instance.new("UIGridLayout")
+	GUIObject.Menu = Instance.new("Frame")
+	GUIObject.DestroyFrame = Instance.new("Frame")
+	GUIObject.UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+	GUIObject.UIGradient_3 = Instance.new("UIGradient")
+	GUIObject.UICorner_3 = Instance.new("UICorner")
+	GUIObject.DestroyButton = Instance.new("TextButton")
+	GUIObject.PlayerFrame = Instance.new("Frame")
+	GUIObject.UIGradient_4 = Instance.new("UIGradient")
+	GUIObject.UICorner_4 = Instance.new("UICorner")
+	GUIObject.PlayerExecute = Instance.new("TextBox")
+	GUIObject.BreastsTypeFrame = Instance.new("Frame")
+	GUIObject.UIGradient_5 = Instance.new("UIGradient")
+	GUIObject.UICorner_5 = Instance.new("UICorner")
+	GUIObject.BreastsTypeButton = Instance.new("TextButton")
+	GUIObject.BundleFrame = Instance.new("Frame")
+	GUIObject.UIGradient_6 = Instance.new("UIGradient")
+	GUIObject.UICorner_6 = Instance.new("UICorner")
+	GUIObject.BundleText = Instance.new("TextLabel")
+	GUIObject.DelayFrame = Instance.new("Frame")
+	GUIObject.UIGradient_7 = Instance.new("UIGradient")
+	GUIObject.UICorner_7 = Instance.new("UICorner")
+	GUIObject.DelayTimeText = Instance.new("TextBox")
+	GUIObject.AutoExecuteFrame = Instance.new("Frame")
+	GUIObject.UICorner_8 = Instance.new("UICorner")
+	GUIObject.UIGradient_8 = Instance.new("UIGradient")
+	GUIObject.AutoExecuteButton = Instance.new("TextButton")
+	GUIObject.BundleBodyColorFrame = Instance.new("Frame")
+	GUIObject.UIGradient_15 = Instance.new("UIGradient")
+	GUIObject.UICorner_15 = Instance.new("UICorner")
+	GUIObject.BundleBodyColorButton = Instance.new("TextButton")
+	GUIObject.ResetFrame = Instance.new("Frame")
+	GUIObject.UICorner_9 = Instance.new("UICorner")
+	GUIObject.UIGradient_9 = Instance.new("UIGradient")
+	GUIObject.ResetButton = Instance.new("TextButton")
+	GUIObject.ExecuteFrame = Instance.new("Frame")
+	GUIObject.UICorner_10 = Instance.new("UICorner")
+	GUIObject.UIGradient_10 = Instance.new("UIGradient")
+	GUIObject.ExecuteButton = Instance.new("TextButton")
+	GUIObject.ToneFrame = Instance.new("Frame")
+	GUIObject.UIGradient_11 = Instance.new("UIGradient")
+	GUIObject.UICorner_11 = Instance.new("UICorner")
+	GUIObject.ToneButton = Instance.new("TextButton")
+	GUIObject.Bundles = Instance.new("Frame")
+	GUIObject.BundlesButtonFrame = Instance.new("ScrollingFrame")
+	GUIObject.UIGridLayout_2 = Instance.new("UIGridLayout")
+	GUIObject.ButtonFrame = Instance.new("Frame")
+	GUIObject.UIListLayout = Instance.new("UIListLayout")
+	GUIObject.FaceFrame = Instance.new("Frame")
+	GUIObject.UIGradient_17 = Instance.new("UIGradient")
+	GUIObject.UICorner_17 = Instance.new("UICorner")
+	GUIObject.FaceButton = Instance.new("TextButton")
+	GUIObject.Menu_2 = Instance.new("Frame")
+	GUIObject.UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+	GUIObject.UICorner_12 = Instance.new("UICorner")
+	GUIObject.MenuButton = Instance.new("TextButton")
+	GUIObject.UIGradient_12 = Instance.new("UIGradient")
+	GUIObject.Clothes_2 = Instance.new("Frame")
+	GUIObject.UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
+	GUIObject.UICorner_13 = Instance.new("UICorner")
+	GUIObject.ClothesButton = Instance.new("TextButton")
+	GUIObject.UIGradient_13 = Instance.new("UIGradient")
+	GUIObject.Bundles_2 = Instance.new("Frame")
+	GUIObject.UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
+	GUIObject.UICorner_14 = Instance.new("UICorner")
+	GUIObject.BundlesButton = Instance.new("TextButton")
+	GUIObject.UIGradient_14 = Instance.new("UIGradient")
+	GUIObject.NameFrame = Instance.new("Frame")
+	GUIObject.NameText = Instance.new("TextLabel")
+	GUIObject.VersionText = Instance.new("TextLabel")
+	GUIObject.KeybindFrame = Instance.new("Frame")
+	GUIObject.UIGradient_16 = Instance.new("UIGradient")
+	GUIObject.UICorner_16 = Instance.new("UICorner")
+	GUIObject.KeybindButton = Instance.new("TextButton")
+	GUIObject.RoClothes = Instance.new("ScreenGui")
+	GUIObject.Menu2 = Instance.new("Frame")
+	GUIObject.LocalTransparencyFrame = Instance.new("Frame")
+	GUIObject.UIGradient_18 = Instance.new("UIGradient")
+	GUIObject.UICorner_18 = Instance.new("UICorner")
+	GUIObject.LocalTransparencyButton = Instance.new("TextBox")
+	GUIObject.CharacterFrame = Instance.new("Frame")
+	GUIObject.UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
+	GUIObject.LeftArmButton = Instance.new("ImageButton")
+	GUIObject.TorsoButton = Instance.new("ImageButton")
+	GUIObject.RightArmButton = Instance.new("ImageButton")
+	GUIObject.RightLegButton = Instance.new("ImageButton")
+	GUIObject.LeftLegButton = Instance.new("ImageButton")
+	GUIObject.HeadButton = Instance.new("ImageButton")
+	GUIObject.UICorner_19 = Instance.new("UICorner")
+	GUIObject.Menu2_2 = Instance.new("Frame")
+	GUIObject.UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
+	GUIObject.UICorner_20 = Instance.new("UICorner")
+	GUIObject.Menu2Button = Instance.new("TextButton")
+	GUIObject.UIGradient_19 = Instance.new("UIGradient")
+	GUIObject.MeshSizeLockFrame = Instance.new("Frame")
+	GUIObject.UIGradient_20 = Instance.new("UIGradient")
+	GUIObject.UICorner_21 = Instance.new("UICorner")
+	GUIObject.MeshSizeLockButton = Instance.new("TextButton")
+	GUIObject.AccessorySizeLockFrame = Instance.new("Frame")
+	GUIObject.UIGradient_21 = Instance.new("UIGradient")
+	GUIObject.UICorner_22 = Instance.new("UICorner")
+	GUIObject.AccessorySizeLockButton = Instance.new("TextButton")
+	GUIObject.MeshBasePartInvisibleFrame = Instance.new("Frame")
+	GUIObject.UIGradient_22 = Instance.new("UIGradient")
+	GUIObject.UICorner_23 = Instance.new("UICorner")
+	GUIObject.MeshBasePartInvisibleButton = Instance.new("TextButton")
+	GUIObject.BodyPartPhysicsFrame = Instance.new("Frame")
+	GUIObject.UIGradient_23 = Instance.new("UIGradient")
+	GUIObject.UICorner_24 = Instance.new("UICorner")
+	GUIObject.BodyPartPhysicsButton = Instance.new("TextButton")
+	GUIObject.MethodFrame = Instance.new("Frame")
+	GUIObject.UIGradient_24 = Instance.new("UIGradient")
+	GUIObject.UICorner_25 = Instance.new("UICorner")
+	GUIObject.MethodButton = Instance.new("TextButton")
+	GUIObject.Edit_2 = Instance.new("Frame")
+	GUIObject.UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
+	GUIObject.UICorner_33 = Instance.new("UICorner")
+	GUIObject.EditButton = Instance.new("TextButton")
+	GUIObject.UIGradient_32 = Instance.new("UIGradient")
+	GUIObject.Catalog_2 = Instance.new("Frame")
+	GUIObject.UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
+	GUIObject.UICorner_34 = Instance.new("UICorner")
+	GUIObject.CatalogButton = Instance.new("TextButton")
+	GUIObject.UIGradient_33 = Instance.new("UIGradient")
+	GUIObject.Catalog_3 = Instance.new("Frame")
+	GUIObject.UsernameFrame = Instance.new("Frame")
+	GUIObject.UICorner_27 = Instance.new("UICorner")
+	GUIObject.UsernameTextbox = Instance.new("TextBox")
+	GUIObject.UIGradient_26 = Instance.new("UIGradient")
+	GUIObject.AccessoryFrame = Instance.new("Frame")
+	GUIObject.UICorner_28 = Instance.new("UICorner")
+	GUIObject.AccessoryTextbox = Instance.new("TextBox")
+	GUIObject.UIGradient_27 = Instance.new("UIGradient")
+	GUIObject.ShirtFrame = Instance.new("Frame")
+	GUIObject.UICorner_29 = Instance.new("UICorner")
+	GUIObject.ShirtTextbox = Instance.new("TextBox")
+	GUIObject.UIGradient_28 = Instance.new("UIGradient")
+	GUIObject.PantsFrame = Instance.new("Frame")
+	GUIObject.UICorner_30 = Instance.new("UICorner")
+	GUIObject.PantsTextbox = Instance.new("TextBox")
+	GUIObject.UIGradient_29 = Instance.new("UIGradient")
+	GUIObject.ShirtGraphicFrame = Instance.new("Frame")
+	GUIObject.UICorner_31 = Instance.new("UICorner")
+	GUIObject.ShirtGraphicTextbox = Instance.new("TextBox")
+	GUIObject.UIGradient_30 = Instance.new("UIGradient")
+	GUIObject.Edit = Instance.new("Frame")
+	GUIObject.MeshNameFrame = Instance.new("Frame")
+	GUIObject.UICorner_32 = Instance.new("UICorner")
+	GUIObject.MeshNameTextbox = Instance.new("TextBox")
+	GUIObject.UIGradient_31 = Instance.new("UIGradient")
+	GUIObject.PropertyListFrame = Instance.new("ScrollingFrame")
+	GUIObject.UIGridLayout_4 = Instance.new("UIGridLayout")
+	GUIObject.EditNote = Instance.new("TextLabel")
+	GUIObject.CharacterPreviewFrame = Instance.new("Frame")
+	GUIObject.ViewportFrame = Instance.new("ViewportFrame")
+	GUIObject.ViewportCamera = Instance.new("Camera")
+	GUIObject.PreviewUIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+	GUIObject.PreviewButton = Instance.new("TextButton")
+	GUIObject.ClickExecuteFrame = Instance.new("Frame")
+	GUIObject.UIGradientCE = Instance.new("UIGradient")
